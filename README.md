@@ -18,7 +18,6 @@ craft a hab, and decide whether you are brave enough for the Dunes. No download,
 [![Docs](https://img.shields.io/badge/Colonist_guide-%2Fdocs-C9702F?style=for-the-badge&labelColor=150F0E)](https://marsgard.world/docs)
 
 [![X](https://img.shields.io/badge/X-@marsgard-150F0E?style=flat-square&logo=x)](https://x.com/marsgard)
-[![Telegram](https://img.shields.io/badge/Telegram-t.me%2Fmarsgard-229ED9?style=flat-square&logo=telegram)](https://t.me/marsgard)
 [![Chain](https://img.shields.io/badge/Robinhood_Chain-EVM_4663-A0402A?style=flat-square)](https://robinhoodchain.blockscout.com)
 [![Token](https://img.shields.io/badge/%24MGARD-fair_launch-FFB454?style=flat-square)](#token-at-a-glance)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -266,9 +265,6 @@ Nothing in Phase 2 ships before Phase 1 holds 300 concurrent for seven straight 
 | Game | [play.marsgard.world](https://play.marsgard.world) |
 | Colonist guide | [marsgard.world/docs](https://marsgard.world/docs) |
 | X | [@marsgard](https://x.com/marsgard) |
-| Telegram channel | [t.me/marsgard](https://t.me/marsgard) |
-| Telegram bot | [@marsgard_bot](https://t.me/marsgard_bot) |
-| Medium | [@marsgard](https://medium.com/@marsgard) |
 | Explorer | [robinhoodchain.blockscout.com](https://robinhoodchain.blockscout.com) |
 
 ---
@@ -276,7 +272,7 @@ Nothing in Phase 2 ships before Phase 1 holds 300 concurrent for seven straight 
 ## ⚠️ Scam Warning
 
 - There is **no presale**, **no whitelist** and **no allocation**. Anyone offering one is a scammer.
-- The contract address will be published **only** on this repository, on [marsgard.world](https://marsgard.world), on [@marsgard](https://x.com/marsgard) and in [t.me/marsgard](https://t.me/marsgard). Verify it in at least two of those places before you send anything.
+- The contract address will be published **only** on this repository, on [marsgard.world](https://marsgard.world), on [@marsgard](https://x.com/marsgard). Verify it in at least two of those places before you send anything.
 - Nobody from the team will ever DM you first, ask for your seed phrase, or ask you to connect a wallet to a link sent in a direct message.
 - Team allocation at launch is 0%. Any wallet claiming to be an official team allocation is not one.
 
