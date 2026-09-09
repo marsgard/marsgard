@@ -186,6 +186,13 @@ squats land they stopped playing on.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+**Where the server stands today.** For signed-in colonists the shard is the referee: node hp
+and respawn, loot rolls, XP, credits, cargo, the bank, Depot trades, recipes, placement, quest
+rewards and wrecks all resolve on the server from its own copy of the client's numbers, and the
+client renders the answer. Still client-side, and the next to move: movement integration, O₂
+and suit drain, drone AI. Anonymous colonists keep the solo simulation in their browser and are
+refereed for nothing, which is why the card pages still say what they say.
+
 **Anti-cheat, in short.** Movement is integrated server side at the colonist's real speed
 and teleports are rejected rather than corrected. Interacts require distance under 2.8 m,
 the correct tool in cargo and a per-node cooldown. Rate limits sit at one intent per 100 ms
@@ -201,7 +208,8 @@ the sol and revealed after it.
 | Path | Contents |
 |---|---|
 | [`game/`](game) | The playable client. Vite + TypeScript + three.js, five zones, 38 nodes, Depot, bank, crafting, quests, skills, maps, mobile controls |
-| [`web/`](web) | Landing page and the colonist guide. Next.js + Tailwind, live three.js diorama built from the game's own GLB assets |
+| [`web/`](web) | Landing page, the colonist guide, and public colonist cards at `/c/{name}` with generated share images. Next.js + Tailwind, live three.js diorama built from the game's own GLB assets |
+| [`server/`](server) | The presence service. WebSocket shards that broadcast where every colonist is, wallet sign-in with server-side saves, world chat, plus the read-only card API the website reads. Node + `ws` + `viem`, non-root container |
 | [`viewer/`](viewer) | Model inspector for the voxel assets and animation clips |
 | [`assets/`](assets) | Headless Blender source scripts and the exported GLB set (colonist, gear, tools, props) |
 | [`brand/`](brand) | Logo, mark, favicon and OG card |
@@ -222,7 +230,13 @@ cd game && pnpm install && pnpm dev
 
 # the landing page and docs, on http://localhost:3000
 cd ../web && pnpm install && pnpm dev
+
+# the presence service, on ws://localhost:8790 — optional; the game runs solo without it
+cd ../server && pnpm install && pnpm dev
 ```
+
+To see other colonists, open the game with `?presence=ws://localhost:8790` in a second tab.
+To render colonist cards locally, start the website with `PRESENCE_URL=http://localhost:8790`.
 
 `pnpm build` in either directory produces a production build. The game emits a static
 `dist/`. The landing page emits a standalone Next.js server under `.next/standalone`.
@@ -237,7 +251,7 @@ cd ../web && pnpm install && pnpm dev
 | Client build | Vite 7 + TypeScript 5 | Fast iteration, `three` split into its own cached chunk |
 | Terrain | Analytic heightfield | One function drives the mesh, the collision and the baked map, so the map metre is the walked metre |
 | Landing page | Next.js 16 + React 19 + Tailwind 4 | Standalone output, static WebP art, immutable asset headers |
-| Server | Node, one process per realm shard | Authoritative world state, WebSocket tick at 10/s |
+| Server | Node + `ws`, shards inside one process | Presence today at 6 ticks/s; authoritative world state lands here in Phase 1's second half |
 | Persistence | Managed Postgres with row-level security | Append-only ledger for credits and settled trades |
 | Chain | Robinhood Chain (EVM) | Standard ERC-20, one small plot registry, nothing held on-chain for users |
 
@@ -248,10 +262,10 @@ cd ../web && pnpm install && pnpm dev
 | Phase | When | Scope |
 |---|---|---|
 | **0. Playable slice** | Done | Voxel colonist and gear, Mars terrain and sky, sol cycle, storms, drones, five zones, 38 nodes, Depot, bank, crafting, building, wrecks, quest chain, dailies, skills, maps, HUD, mobile |
-| **1. Multiplayer** | Weeks 1 to 6 | Authoritative server, WebSocket tick, shared world, wallet sign-in, world chat, landing page and docs, Telegram channel and bot, closed beta with 100 colonists |
-| **2. Token and economy** | Weeks 7 to 10 | `$MGARD` fair launch, gate at 10,000 held with 24 h for trading, player market, Supply Drop wheel, treasury page with burn totals |
+| **1. Multiplayer** | Weeks 1 to 6 | Shipped: presence shards, other colonists in the world and on the map, colonist cards at `/c/{name}`, wallet sign-in with server-side saves, world chat, the referee for signed-in colonists (nodes, loot, credits, cargo, trades, crafting, quests, wrecks), landing page and docs. Next: server-integrated movement and O₂, closed beta with 100 colonists |
+| **2. Token and economy** | Weeks 7 to 10 | Shipped: the gate (10,000 held, read from chain), the Supply Drop wheel with committed per-sol seeds and paid spins, the treasury page summed from chain events, the player market (credits for `$MGARD` with escrow, 24 h holding and dual-receipt settlement; items for credits at no fee). Paid spins wait for a live price |
 | **3. The Dunes** | Months 3 to 4 | PvP outside the fence, wreck looting, arena with credit stakes, guilds and guild bank, storm seasons, founder wall, cosmetics |
-| **4. The Ridge and beyond** | Months 5 to 12 | 1,024 plots and plot NFTs, colony names on the map, offline production with upkeep, Lava Tubes and Tharsis realms, Council votes, Telegram Mini App |
+| **4. The Ridge and beyond** | Months 5 to 12 | 1,024 plots and plot NFTs, colony names on the map, offline production with upkeep, Lava Tubes and Tharsis realms, Council votes |
 
 Nothing in Phase 2 ships before Phase 1 holds 300 concurrent for seven straight sols.
 
@@ -272,7 +286,7 @@ Nothing in Phase 2 ships before Phase 1 holds 300 concurrent for seven straight 
 ## ⚠️ Scam Warning
 
 - There is **no presale**, **no whitelist** and **no allocation**. Anyone offering one is a scammer.
-- The contract address will be published **only** on this repository, on [marsgard.world](https://marsgard.world), on [@marsgard](https://x.com/marsgard). Verify it in at least two of those places before you send anything.
+- The contract address will be published **only** on this repository, on [marsgard.world](https://marsgard.world), and on [@marsgard](https://x.com/marsgard). Verify it in all three places before you send anything.
 - Nobody from the team will ever DM you first, ask for your seed phrase, or ask you to connect a wallet to a link sent in a direct message.
 - Team allocation at launch is 0%. Any wallet claiming to be an official team allocation is not one.
 
