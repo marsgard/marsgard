@@ -189,8 +189,9 @@ squats land they stopped playing on.
 **Where the server stands today.** For signed-in colonists the shard is the referee: node hp
 and respawn, loot rolls, XP, credits, cargo, the bank, Depot trades, recipes, placement, quest
 rewards and wrecks all resolve on the server from its own copy of the client's numbers, and the
-client renders the answer. Still client-side, and the next to move: movement integration, O₂
-and suit drain, drone AI. Anonymous colonists keep the solo simulation in their browser and are
+client renders the answer. Still client-side, and the next to move: drone AI, and movement
+integration from intents (today the server refuses any step a colonist could not have walked,
+and drains O₂ and suit against the position it accepted). Anonymous colonists keep the solo simulation in their browser and are
 refereed for nothing, which is why the card pages still say what they say.
 
 **Anti-cheat, in short.** Movement is integrated server side at the colonist's real speed
@@ -262,7 +263,7 @@ To render colonist cards locally, start the website with `PRESENCE_URL=http://lo
 | Phase | When | Scope |
 |---|---|---|
 | **0. Playable slice** | Done | Voxel colonist and gear, Mars terrain and sky, sol cycle, storms, drones, five zones, 38 nodes, Depot, bank, crafting, building, wrecks, quest chain, dailies, skills, maps, HUD, mobile |
-| **1. Multiplayer** | Weeks 1 to 6 | Shipped: presence shards, other colonists in the world and on the map, colonist cards at `/c/{name}`, wallet sign-in with server-side saves, world chat, the referee for signed-in colonists (nodes, loot, credits, cargo, trades, crafting, quests, wrecks), landing page and docs. Next: server-integrated movement and O₂, closed beta with 100 colonists |
+| **1. Multiplayer** | Weeks 1 to 6 | Shipped: presence shards, other colonists in the world and on the map, colonist cards at `/c/{name}`, wallet sign-in with server-side saves, world chat, the referee for signed-in colonists (nodes, loot, credits, cargo, trades, crafting, quests, wrecks), landing page and docs. the referee's O₂, suit, storms and deaths with walk-speed enforcement. Next: drone AI on the server, closed beta with 100 colonists |
 | **2. Token and economy** | Weeks 7 to 10 | Shipped: the gate (10,000 held, read from chain), the Supply Drop wheel with committed per-sol seeds and paid spins, the treasury page summed from chain events, the player market (credits for `$MGARD` with escrow, 24 h holding and dual-receipt settlement; items for credits at no fee). Paid spins wait for a live price |
 | **3. The Dunes** | Months 3 to 4 | PvP outside the fence, wreck looting, arena with credit stakes, guilds and guild bank, storm seasons, founder wall, cosmetics |
 | **4. The Ridge and beyond** | Months 5 to 12 | 1,024 plots and plot NFTs, colony names on the map, offline production with upkeep, Lava Tubes and Tharsis realms, Council votes |
